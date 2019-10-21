@@ -1,0 +1,37 @@
+﻿@model FINAL.Models.UtilisateurViewModel
+
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.Utilisateur.Nom
+    </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+}
+else
+{
+    <p>
+        Veuillez vous authentifier :
+    </p>
+    using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(m => m.Utilisateur.Nom)
+            @Html.TextBoxFor(m => m.Utilisateur.Nom)
+            @Html.ValidationMessageFor(m => m.Utilisateur.Nom)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Utilisateur.MotDePasse)
+            @Html.PasswordFor(m => m.Utilisateur.MotDePasse)
+            @Html.ValidationMessageFor(m => m.Utilisateur.MotDePasse)
+        </div>
+        /*<div>
+            @Html.LabelFor(m => m.Utilisateur.ConfirmMotDePasse)
+            @Html.PasswordFor(m => m.Utilisateur.ConfirmMotDePasse)
+            @Html.ValidationMessageFor(m => m.Utilisateur.ConfirmMotDePasse)
+        </div>*/
+        <input type="submit" value="Se connecter" />
+        <br />
+        @Html.ActionLink("Créer un compte", "CreerCompte")
+    }
+}

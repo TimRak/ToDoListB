@@ -1,0 +1,27 @@
+﻿@model FINAL.Models.Utilisateur
+
+<p>Créer un compte : </p>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Nom)
+        @Html.TextBoxFor(m => m.Nom)
+        @Html.ValidationMessageFor(m => m.Nom)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.MotDePasse)
+        @Html.PasswordFor(m => m.MotDePasse)
+        @Html.ValidationMessageFor(m => m.MotDePasse)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.ConfirmMotDePasse)
+        @Html.PasswordFor(m => m.ConfirmMotDePasse)
+        @Html.ValidationMessageFor(m => m.ConfirmMotDePasse)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <input type="submit" value="Créer" />
+}

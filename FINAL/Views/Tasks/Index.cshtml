@@ -1,0 +1,145 @@
+﻿@model IEnumerable<FINAL.Models.ITask>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tâches à effectuer</h2>
+
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        if ((item.taskmodel.Votes > 0 && item.taskmodel.Type == "blogpost") || (item.taskmodel.Status && item.taskmodel.Type == "task")) // if Status is true
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.taskmodel.Date)
+                </th>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.taskmodel.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.taskmodel.Id }) |
+                    @if (item.taskmodel.Type == "task")
+                    {
+                        @Html.CheckBoxFor(modelItem => item.taskmodel.Status, new { @checked = "checked" })
+                        @Html.DisplayFor(modelItem => item.taskmodel.Status);
+                    }
+                    else if (item.taskmodel.Type == "blogpost")
+                    {
+                        @Html.ActionLink("Up", "UpdateStatus", new { id = item.taskmodel.Id, button = true }, new { @class = "btn" }) @Html.ActionLink("Down", "UpdateStatus", new { id = item.taskmodel.Id, button = false }, new { @class = "btn" }) @Html.DisplayFor(modelItem => item.taskmodel.Votes)
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td style="background:green;  color:white;">
+                    @Html.DisplayFor(modelItem => item.taskmodel.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Date)
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    @Html.DisplayNameFor(model => model.taskmodel.Description)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Description)
+                </td>
+            </tr>
+        }
+
+        if ((item.taskmodel.Votes < 0 && item.taskmodel.Type == "blogpost") || (!item.taskmodel.Status && item.taskmodel.Type == "task")) // if Status is false
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.taskmodel.Date)
+                </th>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.taskmodel.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.taskmodel.Id }) |
+                    @if (item.taskmodel.Type == "task")
+                    {
+                        @Html.ActionLink("Completed", "UpdateStatus", new { id = item.taskmodel.Id, button = true }, new { @class = "btn" });
+                        @Html.DisplayFor(modelItem => item.taskmodel.Status);
+                    }
+                    else if (item.taskmodel.Type == "blogpost")
+                    {
+                        @Html.ActionLink("Up", "UpdateStatus", new {  id = item.taskmodel.Id, button = true }, new { @class = "btn" }) @Html.ActionLink("Down", "UpdateStatus", new {  id = item.taskmodel.Id, button = false }, new { @class = "btn" }) @Html.DisplayFor(modelItem => item.taskmodel.Votes)
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td style="background:red; color:white;">
+                    @Html.DisplayFor(modelItem => item.taskmodel.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Date)
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    @Html.DisplayNameFor(model => model.taskmodel.Description)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Description)
+                </td>
+            </tr>
+        }
+
+        if ((item.taskmodel.Votes == 0 && item.taskmodel.Type == "blogpost") || (false && item.taskmodel.Type == "task")) // if Status is ""
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.taskmodel.Date)
+                </th>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.taskmodel.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.taskmodel.Id }) |
+                    @if (item.taskmodel.Type == "task")
+                    {
+                        @Html.ActionLink("Completed", "UpdateStatus", new { id = item.taskmodel.Id, button = true }, new { @class = "btn" });
+                        @Html.DisplayFor(modelItem => item.taskmodel.Status);
+                    }
+                    else if (item.taskmodel.Type == "blogpost")
+                    {
+                        @Html.ActionLink("Up", "UpdateStatus", new {  id = item.taskmodel.Id, button = true }, new { @class = "btn" }) @Html.ActionLink("Down", "UpdateStatus", new {  id = item.taskmodel.Id, button = false }, new { @class = "btn" }) @Html.DisplayFor(modelItem => item.taskmodel.Votes)
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Date)
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    @Html.DisplayNameFor(model => model.taskmodel.Description)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskmodel.Description)
+                </td>
+            </tr>
+            }
+            }
+
+        </table>
